@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project-TS Rock, Paper, Scissors</title>
-  </head>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project-TS Rock, Paper, Scissors</title>
+</head>
+
 <body>
   <section>
     <article>
       <h3>How many rounds?</h3>
-      <div>
-        <input type="radio" name="five" value="5" id="five" checked />
-        <label for="five">5</label>
-      </div>
-      <div>
-        <input type="radio" name="ten" value="10" id="ten" />
-        <label for="ten">10</label>
-      </div>
-      <div>
-        <input type="radio" name="fifteen" value="15" id="fifteen" />
-        <label for="fifteen">15</label>
-      </div>
-      <div>
-        <input type="radio" name="twenty" value="20" id="twenty" />
-        <label for="twenty">20</label>
+      <div class="radio-btn">
+        <div>
+          <input type="radio" name="five" value="5" id="five" checked />
+          <label for="five">5</label>
+        </div>
+        <div>
+          <input type="radio" name="ten" value="10" id="ten" />
+          <label for="ten">10</label>
+        </div>
+        <div>
+          <input type="radio" name="fifteen" value="15" id="fifteen" />
+          <label for="fifteen">15</label>
+        </div>
+        <div>
+          <input type="radio" name="twenty" value="20" id="twenty" />
+          <label for="twenty">20</label>
+        </div>
       </div>
     </article>
 
@@ -54,10 +58,8 @@
           <p>✌️</p>
         </div>
       </div>
-    </div>
-
-    <p>MAKE YOUR MOVE:</p>
-    <a href="">restart</a>
+      <p>MAKE YOUR MOVE:</p>
+      <a href="">restart</a>
     </div>
   </section>
   <script type="module" src="/src/main.ts"></script>
