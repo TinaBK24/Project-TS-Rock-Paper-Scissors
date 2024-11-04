@@ -10,37 +10,49 @@ const paper = document.querySelector("#paper") as HTMLDivElement;
 const scissors = document.querySelector("#scissors") as HTMLDivElement;
 
 const result = document.querySelector("#result") as HTMLParagraphElement;
+const infoDisplay = document.querySelector("#infoDisplay") as HTMLElement;
 
+// ! -------enum----------
 enum gameInput {
   rock,
   paper,
   scissors,
 }
-
-let youInput: gameInput;
-let computerInput: gameInput;
-computerInput = Math.floor(Math.random() * 3);
-console.log(gameInput[computerInput]);
+// ! ---------------------
+let youInput: gameInput = 0;
+let computerInput: gameInput = 0;
+let youScore: number = 0;
+let computerScore: number = 0;
 
 rock?.addEventListener("click", () => {
   youInput = 0;
-  console.log(youInput);
+  computerInput = Math.floor(Math.random() * 3);
 
-  return youInput;
+  playGame(youInput, computerInput);
 });
 paper?.addEventListener("click", () => {
   youInput = 1;
-  console.log(youInput);
-
-  return youInput;
+  computerInput = Math.floor(Math.random() * 3);
+  playGame(youInput, computerInput);
 });
 scissors?.addEventListener("click", () => {
   youInput = 2;
-  console.log(youInput);
-
-  return youInput;
+  computerInput = Math.floor(Math.random() * 3);
+  playGame(youInput, computerInput);
 });
 
-// switch(){
-//     case
-// }
+function playGame(youInput: gameInput, computerInput: gameInput) {
+  switch (true) {
+    case youInput === 0 && computerInput === 0:
+      infoDisplay.textContent = `It was a draw! You both chose Rock`;
+      break;
+    case youInput === 0 && computerInput === 1:
+      infoDisplay.textContent = `Paper beats Rock. You lose!`;
+      computerScore++;
+      result.textContent = `${youScore} : ${computerScore}`;
+      break;
+    case youInput === 0 && computerInput === 2:
+      infoDisplay.textContent = `It was a draw! You both chose Rock`;
+      break;
+  }
+}
