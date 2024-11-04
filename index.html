@@ -1,68 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project-TS Rock, Paper, Scissors</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project-TS Rock, Paper, Scissors</title>
-</head>
+  <body>
+    <section>
+      <article>
+        <h3>How many rounds?</h3>
+        <div class="radio-btn">
+          <div>
+            <input type="radio" name="five" value="5" id="five" checked />
+            <label for="five">5</label>
+          </div>
+          <div>
+            <input type="radio" name="ten" value="10" id="ten" />
+            <label for="ten">10</label>
+          </div>
+          <div>
+            <input type="radio" name="fifteen" value="15" id="fifteen" />
+            <label for="fifteen">15</label>
+          </div>
+          <div>
+            <input type="radio" name="twenty" value="20" id="twenty" />
+            <label for="twenty">20</label>
+          </div>
+        </div>
+      </article>
 
-<body>
-  <section>
-    <article>
-      <h3>How many rounds?</h3>
-      <div class="radio-btn">
-        <div>
-          <input type="radio" name="five" value="5" id="five" checked />
-          <label for="five">5</label>
+      <article>
+        <div class="circle">
+          <div class="rectangle">
+            <p id="youDisplay">You</p>
+          </div>
         </div>
-        <div>
-          <input type="radio" name="ten" value="10" id="ten" />
-          <label for="ten">10</label>
+        <p id="result">0 : 0</p>
+        <div class="circle">
+          <div class="rectangle">
+            <p id="ComputerDisplay">Comp</p>
+          </div>
         </div>
-        <div>
-          <input type="radio" name="fifteen" value="15" id="fifteen" />
-          <label for="fifteen">15</label>
+      </article>
+
+      <div>
+        <h2 id="infoDisplay">Let's play</h2>
+        <div class="choice">
+          <div class="circle" id="rock">
+            <p>✊</p>
+          </div>
+          <div class="circle" id="paper">
+            <p>✋</p>
+          </div>
+          <div class="circle" id="scissors">
+            <p>✌️</p>
+          </div>
         </div>
-        <div>
-          <input type="radio" name="twenty" value="20" id="twenty" />
-          <label for="twenty">20</label>
-        </div>
+        <p>MAKE YOUR MOVE.</p>
+        <a href="">restart</a>
       </div>
-    </article>
-
-    <article>
-      <div class="circle">
-        <div class="rectangle">
-          <p>You</p>
-        </div>
-      </div>
-      <p id="result">0 : 0</p>
-      <div class="circle">
-        <div class="rectangle">
-          <p>Comp</p>
-        </div>
-      </div>
-    </article>
-
-    <div>
-      <h2 id="infoDisplay">Let's play</h2>
-      <div class="choice">
-        <div class="circle" id="rock">
-          <p>✊</p>
-        </div>
-        <div class="circle" id="paper">
-          <p>✋</p>
-        </div>
-        <div class="circle" id="scissors">
-          <p>✌️</p>
-        </div>
-      </div>
-      <p>MAKE YOUR MOVE:</p>
-      <a href="">restart</a>
-    </div>
-  </section>
-  <script type="module" src="/src/main.ts"></script>
-</body>
-
+    </section>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
