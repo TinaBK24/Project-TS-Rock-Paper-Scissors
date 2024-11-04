@@ -29,6 +29,8 @@ rock?.addEventListener("click", () => {
   computerInput = Math.floor(Math.random() * 3);
 
   playGame(youInput, computerInput);
+  console.log(youInput, computerInput, computerScore, youScore);
+  
 });
 paper?.addEventListener("click", () => {
   youInput = 1;
@@ -42,6 +44,7 @@ scissors?.addEventListener("click", () => {
 });
 
 function playGame(youInput: gameInput, computerInput: gameInput) {
+  
   switch (true) {
     case youInput === 0 && computerInput === 0:
       infoDisplay.textContent = `It was a draw! You both chose Rock`;
@@ -52,7 +55,9 @@ function playGame(youInput: gameInput, computerInput: gameInput) {
       result.textContent = `${youScore} : ${computerScore}`;
       break;
     case youInput === 0 && computerInput === 2:
-      infoDisplay.textContent = `It was a draw! You both chose Rock`;
+      infoDisplay.textContent = `Rock beats Scissors. You win!`;
+      youScore++;
+      result.textContent = `${youScore} : ${computerScore}`;
       break;
   }
 }
