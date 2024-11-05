@@ -1,9 +1,7 @@
 import "./style.css";
 
-const five = document.querySelector("#five") as HTMLInputElement;
-const ten = document.querySelector("#ten") as HTMLInputElement;
-const fifteen = document.querySelector("#fifteen") as HTMLInputElement;
-const twenty = document.querySelector("#twenty") as HTMLInputElement;
+// Hinzufügen eines Event-Handlers für die Radio-Buttons
+const radioBtn = document.querySelectorAll("input[type='radio']");
 
 const rock = document.querySelector("#rock") as HTMLDivElement;
 const paper = document.querySelector("#paper") as HTMLDivElement;
@@ -11,12 +9,8 @@ const scissors = document.querySelector("#scissors") as HTMLDivElement;
 
 const result = document.querySelector("#result") as HTMLParagraphElement;
 const infoDisplay = document.querySelector("#infoDisplay") as HTMLElement;
-const youDisplay = document.querySelector(
-  "#youDisplay"
-) as HTMLParagraphElement;
-const ComputerDisplay = document.querySelector(
-  "#ComputerDisplay"
-) as HTMLParagraphElement;
+const youDisplay = document.querySelector("#youDisplay") as HTMLParagraphElement;
+const ComputerDisplay = document.querySelector("#ComputerDisplay") as HTMLParagraphElement;
 // ! -------enum----------
 enum gameInput {
   rock,
@@ -29,27 +23,49 @@ let computerInput: gameInput = 0;
 let youScore: number = 0;
 let computerScore: number = 0;
 
-rock?.addEventListener("click", () => {
-  youInput = 0;
-  computerInput = Math.floor(Math.random() * 3);
-  playGame(youInput, computerInput);
-  youDisplay.textContent = "✊";
-  displayComputerInput(computerInput);
+// Hinzufügen einer Variablen zur Speicherung der ausgewählten Anzahl an Runden
+let totalRounds: number = 5;
+let roundsPlayed: number = 0;
+let isGameOver: boolean = false; // Das Spiel ist beendet nicht
+
+radioBtn.forEach((radio) => {
+  radio.addEventListener("change", (event) => {
+    totalRounds = parseInt((event.target as HTMLInputElement).value);
+    youScore = 0; // Zurücksetzen des Punktestands bei Auswahl einer neuen Rundenanzahl
+    computerScore = 0;
+    result.textContent = "0 : 0"; // Ergebnis auf dem Bildschirm zurücksetzen
+    youDisplay.textContent = "You";
+    ComputerDisplay.textContent = "Comp";
+    infoDisplay.textContent = "Let's play"; // Nachricht zurücksetzen
+    roundsPlayed = 0;
+    isGameOver = false; // Zurücksetzen der gespielten Runden
+  });
 });
-paper?.addEventListener("click", () => {
-  youInput = 1;
-  computerInput = Math.floor(Math.random() * 3);
-  playGame(youInput, computerInput);
-  youDisplay.textContent = "✋";
-  displayComputerInput(computerInput);
-});
-scissors?.addEventListener("click", () => {
-  youInput = 2;
-  computerInput = Math.floor(Math.random() * 3);
-  playGame(youInput, computerInput);
-  youDisplay.textContent = "✌️";
-  displayComputerInput(computerInput);
-});
+
+  rock?.addEventListener("click", () => {
+    if (isGameOver) return; // Nicht spielen, wenn das Spiel beendet ist
+    youInput = 0;
+    computerInput = Math.floor(Math.random() * 3);
+    playGame(youInput, computerInput);
+    youDisplay.textContent = "✊";
+    displayComputerInput(computerInput);
+  });
+  paper?.addEventListener("click", () => {
+    if (isGameOver) return; // Nicht spielen, wenn das Spiel beendet ist
+    youInput = 1;
+    computerInput = Math.floor(Math.random() * 3);
+    playGame(youInput, computerInput);
+    youDisplay.textContent = "✋";
+    displayComputerInput(computerInput);
+  });
+  scissors?.addEventListener("click", () => {
+    if (isGameOver) return; // Nicht spielen, wenn das Spiel beendet ist
+    youInput = 2;
+    computerInput = Math.floor(Math.random() * 3);
+    playGame(youInput, computerInput);
+    youDisplay.textContent = "✌️";
+    displayComputerInput(computerInput);
+  });
 
 function playGame(youInput: gameInput, computerInput: gameInput) {
   switch (true) {
@@ -95,6 +111,23 @@ function playGame(youInput: gameInput, computerInput: gameInput) {
     case youInput === 2 && computerInput === 2:
       infoDisplay.textContent = `It was a draw! You both chose Scissors`;
       break;
+    }
+
+    roundsPlayed++;
+    if(roundsPlayed >= totalRounds){
+      endGame();
+    }
+}
+
+function endGame() {
+  isGameOver = true; // Das Spiel ist beendet
+
+  if (youScore > computerScore) {
+    infoDisplay.textContent = "You win the game!";
+  } else if (computerScore > youScore) {
+    infoDisplay.textContent = "The computer wins the game!";
+  } else {
+    infoDisplay.textContent = "It's a draw!";
   }
 }
 
