@@ -9,8 +9,13 @@ const scissors = document.querySelector("#scissors") as HTMLDivElement;
 
 const result = document.querySelector("#result") as HTMLParagraphElement;
 const infoDisplay = document.querySelector("#infoDisplay") as HTMLElement;
-const youDisplay = document.querySelector("#youDisplay") as HTMLParagraphElement;
-const ComputerDisplay = document.querySelector("#ComputerDisplay") as HTMLParagraphElement;
+const youDisplay = document.querySelector(
+  "#youDisplay"
+) as HTMLParagraphElement;
+const ComputerDisplay = document.querySelector(
+  "#ComputerDisplay"
+) as HTMLParagraphElement;
+const radioBtnDiv = document.querySelector(".radio-btn") as HTMLDivElement;
 // ! -------enum----------
 enum gameInput {
   rock,
@@ -27,6 +32,7 @@ let computerScore: number = 0;
 let totalRounds: number = 5;
 let roundsPlayed: number = 0;
 let isGameOver: boolean = false; // Das Spiel ist beendet nicht
+let roundCounter: number = 0; //für displayRounds() function
 
 radioBtn.forEach((radio) => {
   radio.addEventListener("change", (event) => {
@@ -42,30 +48,33 @@ radioBtn.forEach((radio) => {
   });
 });
 
-  rock?.addEventListener("click", () => {
-    if (isGameOver) return; // Nicht spielen, wenn das Spiel beendet ist
-    youInput = 0;
-    computerInput = Math.floor(Math.random() * 3);
-    playGame(youInput, computerInput);
-    youDisplay.textContent = "✊";
-    displayComputerInput(computerInput);
-  });
-  paper?.addEventListener("click", () => {
-    if (isGameOver) return; // Nicht spielen, wenn das Spiel beendet ist
-    youInput = 1;
-    computerInput = Math.floor(Math.random() * 3);
-    playGame(youInput, computerInput);
-    youDisplay.textContent = "✋";
-    displayComputerInput(computerInput);
-  });
-  scissors?.addEventListener("click", () => {
-    if (isGameOver) return; // Nicht spielen, wenn das Spiel beendet ist
-    youInput = 2;
-    computerInput = Math.floor(Math.random() * 3);
-    playGame(youInput, computerInput);
-    youDisplay.textContent = "✌️";
-    displayComputerInput(computerInput);
-  });
+rock?.addEventListener("click", () => {
+  if (isGameOver) return; // Nicht spielen, wenn das Spiel beendet ist
+  youInput = 0;
+  computerInput = Math.floor(Math.random() * 3);
+  playGame(youInput, computerInput);
+  youDisplay.textContent = "✊";
+  displayComputerInput(computerInput);
+  displayRounds();
+});
+paper?.addEventListener("click", () => {
+  if (isGameOver) return; // Nicht spielen, wenn das Spiel beendet ist
+  youInput = 1;
+  computerInput = Math.floor(Math.random() * 3);
+  playGame(youInput, computerInput);
+  youDisplay.textContent = "✋";
+  displayComputerInput(computerInput);
+  displayRounds();
+});
+scissors?.addEventListener("click", () => {
+  if (isGameOver) return; // Nicht spielen, wenn das Spiel beendet ist
+  youInput = 2;
+  computerInput = Math.floor(Math.random() * 3);
+  playGame(youInput, computerInput);
+  youDisplay.textContent = "✌️";
+  displayComputerInput(computerInput);
+  displayRounds();
+});
 
 function playGame(youInput: gameInput, computerInput: gameInput) {
   switch (true) {
@@ -111,16 +120,25 @@ function playGame(youInput: gameInput, computerInput: gameInput) {
     case youInput === 2 && computerInput === 2:
       infoDisplay.textContent = `It was a draw! You both chose Scissors`;
       break;
-    }
+  }
 
-    roundsPlayed++;
-    if(roundsPlayed >= totalRounds){
-      endGame();
-    }
+  roundsPlayed++;
+  if (roundsPlayed >= totalRounds) {
+    endGame();
+  }
 }
 
 function endGame() {
   isGameOver = true; // Das Spiel ist beendet
+
+  rock.style.display = "none";
+  paper.style.display = "none";
+  scissors.style.display = "none";
+
+  const lastParagraph = document.querySelector(
+    "#lastParagraph"
+  ) as HTMLParagraphElement;
+  lastParagraph.textContent = "👇";
 
   if (youScore > computerScore) {
     infoDisplay.textContent = "You win the game!";
@@ -143,4 +161,10 @@ function displayComputerInput(computerInput: gameInput) {
       ComputerDisplay.textContent = "✌️";
       break;
   }
+}
+
+function displayRounds() {
+  roundCounter++;
+  radioBtnDiv.style.fontSize = "1.6rem";
+  radioBtnDiv.textContent = `${roundCounter}/${totalRounds}`;
 }
